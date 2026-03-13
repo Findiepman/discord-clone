@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Friends grid ── */
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .friend-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+    }
+    .friend-card .fi   { flex: 1; min-width: 0; }
+    .friend-card .fn   { font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .friend-card .fstat { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
+    .friend-card .fbtns { display: flex; gap: 5px; }
+
+    /* ── Pending list ── */
+    .pending-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
+    }
+    .pending-item .pi   { flex: 1; min-width: 0; }
+    .pending-item .pn   { font-weight: 700; font-size: 14px; }
+    .pending-item .pt   { font-size: 12px; color: var(--text-tertiary); font-family: var(--mono); }
+    .pending-item .pk   { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--attention-fg); }
+    .pending-item .pbtns { display: flex; gap: 6px; }
+
+    /* ── Activity feed ── */
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      margin-bottom: 4px;
+    }
+    .activity-item .ac { flex: 1; }
+    .activity-item .am { font-size: 13.5px; line-height: 1.5; }
+    .activity-item .am strong { font-weight: 700; }
+    .activity-item .at { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+    /* ── Page padding ── */
+    .page-body { padding: 28px 32px; }
+
+    /* ── Section spacing ── */
+    .section { margin-bottom: 32px; }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ── Server Rail ── -->
+
+  <!-- ── Channel Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      Direct Messages
+      <span class="chevron">▾</span>
+    </div>
+
+    <div class="sidebar-search">
+      <span class="ico">🔍</span>
+      <input type="text" placeholder="Find a conversation" />
+      <kbd>⌘K</kbd>
+    </div>
+
+    <div class="ch-list">
+      <div class="ch-cat">Friends <span>+</span></div>
+
+      <a href="home.html" class="ch-item active">
+        <span class="sym">🏠</span>
+        <span class="name">Home</span>
+      </a>
+      <a href="friends.html" class="ch-item">
+        <span class="sym">👥</span>
+        <span class="name">Add Friends</span>
+        <span class="badge">2</span>
+      </a>
+
+      <div class="ch-cat" style="margin-top:16px">Direct Messages <span>+</span></div>
+
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-blue" style="flex-shrink:0">
+          <span>TK</span>
+          <span class="pip pip-online"></span>
+        </div>
+        <span class="name">torvalds_k</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-green" style="flex-shrink:0">
+          <span>SN</span>
+          <span class="pip pip-idle"></span>
+        </div>
+        <span class="name">sarah_nova</span>
+        <span class="badge">3</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-purple" style="flex-shrink:0">
+          <span>JR</span>
+          <span class="pip pip-dnd"></span>
+        </div>
+        <span class="name">jdev_rx</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-orange" style="flex-shrink:0">
+          <span>MP</span>
+          <span class="pip pip-offline"></span>
+        </div>
+        <span class="name">m_petrov</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-pink" style="flex-shrink:0">
+          <span>AL</span>
+          <span class="pip pip-online"></span>
+        </div>
+        <span class="name">ana_loops</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-teal" style="flex-shrink:0">
+          <span>BW</span>
+          <span class="pip pip-online"></span>
+        </div>
+        <span class="name">ben_w</span>
+      </a>
+    </div>
+
+    <!-- User panel -->
+    <div class="user-panel">
+      <div class="av av-sm av-blue">
+        Y
+        <span class="pip pip-online"></span>
+      </div>
+      <div class="up-info">
+        <div class="up-name">you</div>
+        <div class="up-tag">#0042</div>
+      </div>
+      <div class="up-btns">
+        <a href="#" class="up-btn" title="Mute">🎙</a>
+        <a href="#" class="up-btn" title="Deafen">🎧</a>
+        <a href="login.html" class="up-btn" title="Settings">⚙️</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <span class="ico">🏠</span>
+      <div class="sep"></div>
+      <span class="title">Home</span>
+      <div class="tabs right">
+        <a href="home.html" class="tab active">Overview</a>
+        <a href="friends.html" class="tab">Add Friend</a>
+      </div>
+      <div style="margin-left:8px; display:flex; gap:2px;">
+        <a href="#" class="topbar-btn" title="Inbox">📥</a>
+        <a href="#" class="topbar-btn" title="Help">❓</a>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="scroll">
+      <div class="page-body">
+
+        <!-- Online friends -->
+        <div class="section">
+          <div class="sec-head">
+            Online <span class="pill">6</span>
+          </div>
+          <div class="friends-grid">
+
+            <div class="card friend-card">
+              <div class="av av-md av-blue">TK<span class="pip pip-online"></span></div>
+              <div class="fi">
+                <div class="fn">torvalds_k</div>
+                <div class="fstat"><span class="status-dot s-online"></span>Playing VS Code</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card">
+              <div class="av av-md av-green">SN<span class="pip pip-idle"></span></div>
+              <div class="fi">
+                <div class="fn">sarah_nova</div>
+                <div class="fstat"><span class="status-dot s-idle"></span>Away · 12 min</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card">
+              <div class="av av-md av-purple">JR<span class="pip pip-dnd"></span></div>
+              <div class="fi">
+                <div class="fn">jdev_rx</div>
+                <div class="fstat"><span class="status-dot s-dnd"></span>Do not disturb</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card">
+              <div class="av av-md av-pink">AL<span class="pip pip-online"></span></div>
+              <div class="fi">
+                <div class="fn">ana_loops</div>
+                <div class="fstat"><span class="status-dot s-online"></span>Listening to Spotify</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card">
+              <div class="av av-md av-teal">BW<span class="pip pip-online"></span></div>
+              <div class="fi">
+                <div class="fn">ben_w</div>
+                <div class="fstat"><span class="status-dot s-online"></span>Online</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card">
+              <div class="av av-md av-orange">MP<span class="pip pip-online"></span></div>
+              <div class="fi">
+                <div class="fn">m_petrov</div>
+                <div class="fstat"><span class="status-dot s-online"></span>In a voice channel</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pending requests -->
+        <div class="section">
+          <div class="sec-head">
+            Pending Requests <span class="pill">2</span>
+          </div>
+
+          <div class="card pending-item">
+            <div class="av av-md av-red">FX</div>
+            <div class="pi">
+              <div class="pn">fx_runner</div>
+              <div class="pt">fx_runner#7731</div>
+              <div class="pk">Incoming request</div>
+            </div>
+            <div class="pbtns">
+              <a href="#" class="btn btn-success" style="padding:5px 14px; font-size:13px">Accept</a>
+              <a href="#" class="btn btn-danger"  style="padding:5px 14px; font-size:13px">Decline</a>
+            </div>
+          </div>
+
+          <div class="card pending-item">
+            <div class="av av-md av-purple">ZQ</div>
+            <div class="pi">
+              <div class="pn">zqdev</div>
+              <div class="pt">zqdev#1102</div>
+              <div class="pk" style="color:var(--text-tertiary)">Outgoing request</div>
+            </div>
+            <div class="pbtns">
+              <a href="#" class="btn btn-danger" style="padding:5px 14px; font-size:13px">Cancel</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offline friends -->
+        <div class="section">
+          <div class="sec-head">
+            Offline <span class="pill">3</span>
+          </div>
+          <div class="friends-grid">
+
+            <div class="card friend-card" style="opacity:.7">
+              <div class="av av-md av-blue">KM<span class="pip pip-offline"></span></div>
+              <div class="fi">
+                <div class="fn">k_miles</div>
+                <div class="fstat"><span class="status-dot s-offline"></span>Last seen 3h ago</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card" style="opacity:.7">
+              <div class="av av-md av-green">LY<span class="pip pip-offline"></span></div>
+              <div class="fi">
+                <div class="fn">li_yang</div>
+                <div class="fstat"><span class="status-dot s-offline"></span>Last seen yesterday</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+            <div class="card friend-card" style="opacity:.7">
+              <div class="av av-md av-orange">RD<span class="pip pip-offline"></span></div>
+              <div class="fi">
+                <div class="fn">r_dolan</div>
+                <div class="fstat"><span class="status-dot s-offline"></span>Last seen 2d ago</div>
+              </div>
+              <div class="fbtns">
+                <a href="messages.html" class="icon-btn" title="Message">💬</a>
+                <a href="#" class="icon-btn red" title="Remove friend">✕</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+</div>
+</body>
+</html>

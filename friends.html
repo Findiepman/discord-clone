@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Add Friends</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-body { padding: 28px 32px; }
+    .section { margin-bottom: 32px; }
+
+    /* Hero add block */
+    .add-hero {
+      background: linear-gradient(135deg, rgba(31,111,235,.12), rgba(56,139,253,.05));
+      border: 1px solid rgba(88,166,255,.18);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+    .add-hero h2 { font-size: 20px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 5px; }
+    .add-hero p  { color: var(--text-secondary); font-size: 14px; margin-bottom: 18px; }
+    .add-row { display: flex; gap: 10px; }
+    .add-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: var(--bg-inset);
+      border: 1px solid var(--border-default);
+      border-radius: var(--r-sm);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: var(--mono);
+      outline: none;
+    }
+    .add-input::placeholder { color: var(--text-tertiary); font-family: var(--font); }
+    .add-input:focus { border-color: var(--accent-fg); box-shadow: 0 0 0 3px rgba(31,111,235,.25); }
+
+    /* Suggestions grid */
+    .sugg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+    }
+    .sugg-card { padding: 16px; }
+    .sugg-top  { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .sugg-info { flex: 1; min-width: 0; }
+    .sugg-name { font-weight: 700; font-size: 14px; }
+    .sugg-user { font-size: 12px; color: var(--text-tertiary); font-family: var(--mono); }
+    .sugg-mutual {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .mutual-avs { display: flex; }
+    .mutual-avs .av { border: 1.5px solid var(--bg-overlay); margin-left: -5px; }
+    .mutual-avs .av:first-child { margin-left: 0; }
+
+    .btn-add {
+      width: 100%;
+      padding: 7px;
+      background: var(--accent-subtle);
+      color: var(--accent-fg);
+      border: 1px solid rgba(88,166,255,.3);
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+      text-align: center;
+      display: block;
+      transition: background .15s, color .15s;
+      text-decoration: none;
+    }
+    .btn-add:hover { background: var(--accent-emphasis); color: #fff; border-color: var(--accent-emphasis); }
+
+    /* Blocked list */
+    .blocked-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      margin-bottom: 5px;
+    }
+    .blocked-item .bi { flex: 1; }
+    .blocked-item .bn { font-weight: 700; font-size: 14px; color: var(--text-secondary); }
+    .blocked-item .bt { font-size: 12px; color: var(--text-tertiary); font-family: var(--mono); }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-header">Direct Messages <span class="chevron">▾</span></div>
+    <div class="sidebar-search">
+      <span class="ico">🔍</span>
+      <input type="text" placeholder="Find a conversation" />
+      <kbd>⌘K</kbd>
+    </div>
+    <div class="ch-list">
+      <div class="ch-cat">Friends <span>+</span></div>
+      <a href="homepage.html" class="ch-item">
+        <span class="sym">🏠</span><span class="name">Home</span>
+      </a>
+      <a href="friends.html" class="ch-item active">
+        <span class="sym">👥</span><span class="name">Add Friends</span>
+        <span class="badge">2</span>
+      </a>
+      <div class="ch-cat" style="margin-top:16px">Direct Messages <span>+</span></div>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-blue" style="flex-shrink:0">TK<span class="pip pip-online"></span></div>
+        <span class="name">torvalds_k</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-green" style="flex-shrink:0">SN<span class="pip pip-idle"></span></div>
+        <span class="name">sarah_nova</span>
+        <span class="badge">3</span>
+      </a>
+      <a href="messages.html" class="ch-item">
+        <div class="av av-sm av-purple" style="flex-shrink:0">JR<span class="pip pip-dnd"></span></div>
+        <span class="name">jdev_rx</span>
+      </a>
+    </div>
+    <div class="user-panel">
+      <div class="av av-sm av-blue">Y<span class="pip pip-online"></span></div>
+      <div class="up-info">
+        <div class="up-name">you</div>
+        <div class="up-tag">#0042</div>
+      </div>
+      <div class="up-btns">
+        <a href="#" class="up-btn">🎙</a>
+        <a href="#" class="up-btn">🎧</a>
+        <a href="login.html" class="up-btn">⚙️</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+    <div class="topbar">
+      <span class="ico">👥</span>
+      <div class="sep"></div>
+      <span class="title">Friends</span>
+      <div class="tabs right">
+        <a href="home.html" class="tab">Overview</a>
+        <a href="friends.html" class="tab active">Add Friend</a>
+      </div>
+      <div style="margin-left:8px; display:flex; gap:2px;">
+        <a href="#" class="topbar-btn">📥</a>
+        <a href="#" class="topbar-btn">❓</a>
+      </div>
+    </div>
+
+    <div class="scroll">
+      <div class="page-body">
+
+        <!-- Add hero -->
+        <div class="add-hero">
+          <h2>Add a Friend</h2>
+          <p>You can add friends with their Nexus username. It's case sensitive!</p>
+          <div class="add-row">
+            <input type="text" class="add-input" placeholder="Enter a username, e.g. wumpus#0001" />
+            <a href="#" class="btn btn-blue" style="padding:10px 20px">Send Friend Request</a>
+          </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="section">
+          <div class="sec-head">People You May Know <span class="pill">8</span></div>
+          <div class="sugg-grid">
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-red">FX<span class="pip pip-online"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">fx_runner</div>
+                  <div class="sugg-user">fx_runner#7731</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-blue">T</div>
+                      <div class="av av-xs av-green">S</div>
+                    </div>
+                    2 mutual friends
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-teal">ZQ<span class="pip pip-idle"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">zqdev</div>
+                  <div class="sugg-user">zqdev#1102</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-purple">J</div>
+                    </div>
+                    1 mutual friend
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-orange">PX<span class="pip pip-offline"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">px_coder</div>
+                  <div class="sugg-user">px_coder#3344</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-blue">T</div>
+                      <div class="av av-xs av-pink">A</div>
+                      <div class="av av-xs av-teal">B</div>
+                    </div>
+                    3 mutual friends
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-pink">NV<span class="pip pip-online"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">nova_v</div>
+                  <div class="sugg-user">nova_v#5566</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-green">S</div>
+                    </div>
+                    1 mutual friend
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-blue">GR<span class="pip pip-dnd"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">g_reyes</div>
+                  <div class="sugg-user">g_reyes#9901</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-blue">T</div>
+                      <div class="av av-xs av-orange">M</div>
+                    </div>
+                    2 mutual friends
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+            <div class="card sugg-card">
+              <div class="sugg-top">
+                <div class="av av-md av-purple">HM<span class="pip pip-online"></span></div>
+                <div class="sugg-info">
+                  <div class="sugg-name">h_mills</div>
+                  <div class="sugg-user">h_mills#2277</div>
+                  <div class="sugg-mutual">
+                    <div class="mutual-avs">
+                      <div class="av av-xs av-pink">A</div>
+                    </div>
+                    1 mutual friend
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="btn-add">+ Add Friend</a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Blocked -->
+        <div class="section">
+          <div class="sec-head">Blocked <span class="pill">2</span></div>
+
+          <div class="card blocked-item">
+            <div class="av av-md av-blue" style="filter:grayscale(1);opacity:.5">SP</div>
+            <div class="bi">
+              <div class="bn">spam_bot99</div>
+              <div class="bt">spam_bot99#0000</div>
+            </div>
+            <a href="#" class="btn btn-ghost" style="padding:5px 14px; font-size:13px">Unblock</a>
+          </div>
+
+          <div class="card blocked-item">
+            <div class="av av-md av-red" style="filter:grayscale(1);opacity:.5">XZ</div>
+            <div class="bi">
+              <div class="bn">xz_troll</div>
+              <div class="bt">xz_troll#1337</div>
+            </div>
+            <a href="#" class="btn btn-ghost" style="padding:5px 14px; font-size:13px">Unblock</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

@@ -17,7 +17,8 @@ The system performs secure comparisons during the login process to ensure that c
 ### Social Features
 Friend System: Users can search for other members and send friend requests.
 
-### Friend Management: Once a request is accepted, users are added to a dedicated friends list, enabling further interaction and status tracking.
+### Friend Management: 
+Once a request is accepted, users are added to a dedicated friends list, enabling further interaction and status tracking.
 
 ## Status
 This project is currently under active development. While the core authentication and social frameworks are functional, additional features and UI refinements are being implemented.
